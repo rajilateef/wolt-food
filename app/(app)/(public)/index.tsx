@@ -1,17 +1,47 @@
-import { View, Text, StyleSheet, Image, TouchableOpacity, Linking } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  Linking,
+} from "react-native";
 import React from "react";
 import Animated, { FadeInDown } from "react-native-reanimated";
 import { Fonts } from "@/constants/theme";
 import AppleAuthButton from "@/components/auth/AppleAuthButton";
 import GoogleAuthButton from "@/components/auth/GoogleAuthButton";
+import SmoothInfiniteScroll from "@/components/SmoothInfiniteScroll";
+import { LinearGradient } from "expo-linear-gradient";
+import { Link } from "expo-router";
 
 const Index = () => {
   const openWebBrowser = () => {
     Linking.openURL("https://wolt.com/en/privacy");
-  }
+  };
   return (
     <View style={styles.container}>
-      <View style={styles.infiniteScrollContainer}></View>
+      <View style={styles.infiniteScrollContainer}>
+        <View>
+          <SmoothInfiniteScroll scrollDirection="down" iconSet="set1" />
+        </View>
+        <View>
+          <SmoothInfiniteScroll scrollDirection="up" iconSet="set2" />
+        </View>
+        <View>
+          <SmoothInfiniteScroll scrollDirection="down" iconSet="set3" />
+        </View>
+        <LinearGradient
+          colors={["transparent", "#fff"]}
+          style={{
+            position: "absolute",
+            height: 200,
+            left: 0,
+            right: 0,
+            bottom: 0,
+          }}
+        />
+      </View>
       <View style={styles.contentContainer}>
         <Image
           source={require("@/assets/images/wolt-logo.png")}
@@ -29,18 +59,23 @@ const Index = () => {
             <GoogleAuthButton />
           </Animated.View>
           <Animated.View entering={FadeInDown.delay(300)}>
-            <TouchableOpacity style={styles.otherButton}>
-              <Text style={styles.otherButtonText}>Other Options</Text>
-            </TouchableOpacity>
+            <Link href={"/(app)/(public)/other-options"} asChild>
+              <TouchableOpacity style={styles.otherButton}>
+                <Text style={styles.otherButtonText}>Other Options</Text>
+              </TouchableOpacity>
+            </Link>
           </Animated.View>
         </View>
 
-        <Animated.View style={styles.privacyContainer} entering={FadeInDown.delay(400)}>
+        <Animated.View
+          style={styles.privacyContainer}
+          entering={FadeInDown.delay(400)}
+        >
           <Text style={styles.privacyText}>
-            Please visit {' '} 
+            Please visit{" "}
             <Text style={styles.privacyLink} onPress={openWebBrowser}>
               Wolt Privacy Statement
-            </Text>{' '}
+            </Text>{" "}
             to learn about personal data processing at Wolt.
           </Text>
         </Animated.View>
@@ -66,9 +101,6 @@ const styles = StyleSheet.create({
     height: 48,
     resizeMode: "contain",
     marginBottom: 16,
-  },
-  infiniteScrollContainer: {
-    flex: 0.8,
   },
   tagline: {
     fontSize: 32,
@@ -101,12 +133,19 @@ const styles = StyleSheet.create({
   },
   privacyText: {
     fontSize: 12,
-    color: '#999',
-    textAlign: 'center',
+    color: "#999",
+    textAlign: "center",
     lineHeight: 18,
   },
   privacyLink: {
-    color: '#4285F4',
-    textDecorationLine: 'underline',
-  } 
+    color: "#4285F4",
+    textDecorationLine: "underline",
+  },
+  infiniteScrollContainer: {
+    flex: 0.8,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 4,
+  },
 });

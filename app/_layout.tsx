@@ -4,7 +4,14 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { useFonts } from "expo-font";
 import {Nunito_400Regular, Nunito_700Bold, Nunito_900Black} from '@expo-google-fonts/nunito'
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 5 * 60 * 1000, // 5 minutes 
+      retry: 1,
+    },
+  },
+});
 
 export default function RootLayout() {
   let [fontsLoaded] = useFonts({
