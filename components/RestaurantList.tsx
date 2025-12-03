@@ -11,6 +11,7 @@ import { useRestaurants } from "@/hooks/useRestaurants";
 import { Colors } from "@/constants/theme";
 import { Ionicons } from "@expo/vector-icons";
 
+
 const RestaurantList = () => {
   const { data: restaurants, isLoading, isError } = useRestaurants();
   if (isLoading) {
