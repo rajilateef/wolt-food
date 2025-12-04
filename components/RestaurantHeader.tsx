@@ -40,15 +40,15 @@ const RestaurantHeader = ({ title, scrollOffset }: RestaurantHeaderProps) => {
       [0, SCROLL_THRESHOLD * 0.6],
       [0, -10],
       Extrapolation.CLAMP
-    )
+    );
 
-    return { opacity, transform: [{ translateY }], };
-  }); 
-  
-    const header2Style = useAnimatedStyle(() => {
+    return { opacity, transform: [{ translateY }] };
+  });
+
+  const header2Style = useAnimatedStyle(() => {
     const opacity = interpolate(
       scrollOffset.value,
-      [SCROLL_THRESHOLD * 0.3, SCROLL_THRESHOLD ],
+      [SCROLL_THRESHOLD * 0.3, SCROLL_THRESHOLD],
       [0, 1],
       Extrapolation.CLAMP
     );
@@ -58,12 +58,12 @@ const RestaurantHeader = ({ title, scrollOffset }: RestaurantHeaderProps) => {
       [0, SCROLL_THRESHOLD * 0.6],
       [-10, 0],
       Extrapolation.CLAMP
-    )
+    );
 
-    return { opacity, transform: [{ translateY }], };
-  }); 
+    return { opacity, transform: [{ translateY }] };
+  });
 
-    const shadowStyle = useAnimatedStyle(() => {
+  const shadowStyle = useAnimatedStyle(() => {
     const opacity = interpolate(
       scrollOffset.value,
       [0, SCROLL_THRESHOLD],
@@ -77,7 +77,9 @@ const RestaurantHeader = ({ title, scrollOffset }: RestaurantHeaderProps) => {
     };
   });
   return (
-    <Animated.View style={[styles.headerContainer, { paddingTop: insets.top }, shadowStyle ]}>
+    <Animated.View
+      style={[styles.headerContainer, { paddingTop: insets.top }, shadowStyle]}
+    >
       {/* Header Container 1 */}
       <Animated.View style={[styles.header1, headerStyle]}>
         <Link href="/(app)/(auth)/(modal)/location" asChild>
@@ -95,9 +97,11 @@ const RestaurantHeader = ({ title, scrollOffset }: RestaurantHeaderProps) => {
               <Ionicons name="filter" size={20} />
             </TouchableOpacity>
           </Link>
-          <TouchableOpacity style={styles.iconButton} onPress={() => {}}>
-            <Ionicons name="map-outline" size={20} />
-          </TouchableOpacity>
+          <Link href="/(app)/(auth)/(modal)/map" asChild>
+            <TouchableOpacity style={styles.iconButton} onPress={() => {}}>
+              <Ionicons name="map-outline" size={20} />
+            </TouchableOpacity>
+          </Link>
         </View>
       </Animated.View>
 

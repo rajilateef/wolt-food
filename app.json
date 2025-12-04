@@ -41,7 +41,28 @@
           }
         }
       ],
-      "expo-font"
+      "expo-font",
+      [
+        "expo-maps",
+        {
+          "requestLocationPermission": true,
+          "locationPermission": "Allow $(PRODUCT_NAME) to access your location"
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Allow $(PRODUCT_NAME) to access your location"
+        }
+      ],
+      [
+        "@sentry/react-native/expo",
+        {
+          "url": "https://sentry.io/",
+          "project": "wolt-food",
+          "organization": "latechify-digital-hub"
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true,
