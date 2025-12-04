@@ -12,8 +12,28 @@ const queryClient = new QueryClient({
     },
   },
 });
+import * as Sentry from '@sentry/react-native';
 
-export default function RootLayout() {
+Sentry.init({
+  dsn: 'https://c2cc93e19409a518a8547ec1d10ddac2@o4509017364889600.ingest.de.sentry.io/4510475114971216',
+
+  // Adds more context data to events (IP address, cookies, user, etc.)
+  // For more information, visit: https://docs.sentry.io/platforms/react-native/data-management/data-collected/
+  sendDefaultPii: true,
+
+  // Enable Logs
+  enableLogs: true,
+
+  // Configure Session Replay
+  replaysSessionSampleRate: 0.1,
+  replaysOnErrorSampleRate: 1,
+  integrations: [Sentry.mobileReplayIntegration()],
+
+  // uncomment the line below to enable Spotlight (https://spotlightjs.com)
+  // spotlight: __DEV__,
+});
+
+export default Sentry.wrap(function RootLayout() {
   let [fontsLoaded] = useFonts({
  
     Nunito_400Regular,
@@ -29,4 +49,4 @@ export default function RootLayout() {
       </QueryClientProvider>
     </GestureHandlerRootView>
   );
-}
+});

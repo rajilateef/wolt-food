@@ -5,6 +5,7 @@ import {
   Image,
   TouchableOpacity,
   Linking,
+  Button,
 } from "react-native";
 import React from "react";
 import Animated, { FadeInDown } from "react-native-reanimated";
@@ -14,11 +15,12 @@ import GoogleAuthButton from "@/components/auth/GoogleAuthButton";
 import SmoothInfiniteScroll from "@/components/SmoothInfiniteScroll";
 import { LinearGradient } from "expo-linear-gradient";
 import { Link } from "expo-router";
+import * as Sentry from "@sentry/react-native";
 
 const Index = () => {
   const openWebBrowser = () => {
     Linking.openURL("https://wolt.com/en/privacy");
-  };
+  }; 
   return (
     <View style={styles.container}>
       <View style={styles.infiniteScrollContainer}>
@@ -66,6 +68,9 @@ const Index = () => {
             </Link>
           </Animated.View>
         </View>
+        <Button title="try" onPress={() => {
+          Sentry.captureException(new Error('First error'));
+        }}/>
 
         <Animated.View
           style={styles.privacyContainer}
